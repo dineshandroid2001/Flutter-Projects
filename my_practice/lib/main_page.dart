@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-//import 'package:my_practice/jsonmodel/users.dart';
+import 'package:my_practice/jsonmodel/users.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,6 +21,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -66,9 +68,8 @@ class _MainPageState extends State<MainPage> {
                     var status = await Permission.photos.request();
                     if (status.isGranted) {
                       imagefromgallery();
-                      ;
                     } else {
-                      openAppSettings();
+                      //openAppSettings();
                     }
                   },
                   child: const Text(
@@ -91,23 +92,41 @@ class _MainPageState extends State<MainPage> {
             ),
             Column(
               children: [
-                ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (context,index) {
-                    final user = users[index];
-                    final email = user['email'];
-                    return ListTile(
-                      title : Text(email),
-                    );
-                }),
                 TextButton(
-                    onPressed: () {
-                      apicall();
+                    onPressed: () async {
+                      const url = 'https://randomuser.me/api/?results=20';
+                      final uri = Uri.parse(url);
+                      final response = await http.get(uri);
+                      final body = response.body;
+                      final json = jsonDecode(body);
+                      setState(() {
+                        users = json['results'];
+                      });
                     },
                     child: const Text(
                       'Call API',
                       style: TextStyle(color: Colors.black),
                     )),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: users.length,
+                      itemBuilder: (context, index) {
+                        final user = users[index];
+                        final name = user['name']['first'];
+                        final email = user['email'];
+                        final image = user['picture']['thumbnail'];
+                        return ListTile(
+                          leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(125),
+                              child: Image.network(image)),
+                          title: Text(name),
+                          subtitle: Text(
+                            email,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        );
+                      }),
+                ),
               ],
             ),
             const Text('chat'),
@@ -137,17 +156,6 @@ class _MainPageState extends State<MainPage> {
     }
     setState(() {
       selectimage = File(returngallery.path);
-    });
-  }
-
-  void apicall() async {
-    const url = 'https://randomuser.me/api/?results=5';
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final body = response.body;
-    final json = jsonDecode(body);
-    setState(() {
-      users = json['results'];
     });
   }
 }
