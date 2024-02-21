@@ -110,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                     )),
               ],
             ),
-            const Text('chats'),
+            const Text('chat'),
           ]),
         ),
       ),
