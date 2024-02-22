@@ -46,12 +46,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: const Color.fromARGB(0, 255, 59, 59),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.green,
         title: const Text(
-          'Login Page',
+          'Start Chat',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             fontSize: 25.0,
@@ -66,10 +66,11 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const SizedBox(height: 20.0),
                 const Text(
-                  'Login with Username or Phone Number',
+                  'Welcomes You!',
                   style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.black,
+                    fontSize: 30.0,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic
                   ),
                 ),
                 const SizedBox(height: 20.0),
@@ -164,7 +165,10 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: const Text(
                       'Sign In',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black
+                        ),
                     ),
                   ),
                 ),
@@ -177,57 +181,40 @@ class _HomePageState extends State<HomePage> {
                         ),
                       )
                     : const SizedBox(),
-
                 const SizedBox(height: 20.0),
 
-                const Text(
-                  "If you don't have account. Kindly Sign Up",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-
-                const SizedBox(height: 20.0),
-
-                Container(
-                  height: 55,
-                  width: MediaQuery.of(context).size.width * .9,
-                  decoration: const BoxDecoration(
-                    //borderRadius: BorderRadius.zero,
-                    color: Colors.green,
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
+                Row(
+                  children: [
+                    const SizedBox(width: 30),
+                    const Text(
+                      "If you don't have account.",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.red,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const SignUp()));
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green),
-                    ),
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
+                      },
+                      child: const Text('Sign Up',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.green,
+                      ),),
+                      ),
+                  ],
                 ),
                 const SizedBox(height: 20.0),
-
-                // const Divider(
-                //   color: Colors.black,
-                //   thickness: 5.0,
-                // ),
-
-                const SizedBox(height: 20.0),
-
                 Container(
                   height: 55,
                   width: MediaQuery.of(context).size.width * .9,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.zero,
-                    color: Colors.purple,
+                    color: Colors.green,
                   ),
                   child: TextButton(
                     onPressed: () {

@@ -38,12 +38,12 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: const Color.fromARGB(0, 255, 59, 59),
         appBar: AppBar(
           backgroundColor: Colors.green,
           centerTitle: true,
           title: const Text(
-            'Sign Up',
+            'Start Chat',
             style: TextStyle(
               fontStyle: FontStyle.italic,
               fontSize: 25.0,
@@ -56,7 +56,12 @@ class _SignUpState extends State<SignUp> {
               key: _formKey,
               child: Column(
                 children: [
-                  const SizedBox(height: 30.0),
+                  const SizedBox(height: 10),
+                  Container(
+                    height: 200,
+                    width: 200,
+                    child: Image.asset('image/new.png',fit: BoxFit.cover,),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
                     child: TextFormField(
@@ -239,7 +244,7 @@ class _SignUpState extends State<SignUp> {
                       child: const Text(
                         'Save and Create Account',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 20.0,
                         ),
                       ),
