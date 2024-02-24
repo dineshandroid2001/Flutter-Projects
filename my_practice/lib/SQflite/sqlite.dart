@@ -7,7 +7,6 @@ class DatabaseHelper {
   String users =
       "create table users (userid INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT)";
 
-  //We are done in this section
 
   Future<Database> initDB() async {
     final databasePath = await getDatabasesPath();

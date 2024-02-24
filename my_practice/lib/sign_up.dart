@@ -37,10 +37,11 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(0, 255, 59, 59),
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.brown,
           centerTitle: true,
           title: const Text(
             'Start Chat',
@@ -234,7 +235,7 @@ class _SignUpState extends State<SignUp> {
                     height: 55,
                     width: MediaQuery.of(context).size.width * .9,
                     decoration: const BoxDecoration(
-                      color: Colors.purple,
+                      color: Colors.brown,
                     ),
                     child: TextButton(
                       onPressed: () {
@@ -244,7 +245,7 @@ class _SignUpState extends State<SignUp> {
                       child: const Text(
                         'Save and Create Account',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20.0,
                         ),
                       ),

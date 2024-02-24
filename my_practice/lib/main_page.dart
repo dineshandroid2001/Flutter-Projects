@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+//import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 
 class MainPage extends StatefulWidget {
@@ -23,7 +23,7 @@ class _MainPageState extends State<MainPage> {
       home: DefaultTabController(
         length: 4,
         child: Scaffold(
-          backgroundColor: Colors.brown,
+          backgroundColor: const Color.fromARGB(0, 255, 59, 59),
           appBar: AppBar(
             bottom: const TabBar(
               tabs: [
@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: Colors.green,
             centerTitle: true,
             title: const Text(
-              'Application',
+              'Start Chat',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 30.0,
@@ -62,14 +62,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const SizedBox(height: 10.0),
                 ElevatedButton(
-                  onPressed: () async {
-                    var status = await Permission.photos.request();
-                    if (status.isGranted) {
-                      imagefromgallery();
-                    } else {
-                      //openAppSettings();
-                    }
-                  },
+                  onPressed: () {imagefromgallery();},
                   child: const Text(
                     'Select Photo from Gallery',
                     style: TextStyle(
@@ -103,7 +96,7 @@ class _MainPageState extends State<MainPage> {
                     },
                     child: const Text(
                       'Call API',
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                     )),
                 Expanded(
                   child: ListView.builder(
@@ -117,17 +110,17 @@ class _MainPageState extends State<MainPage> {
                           leading: ClipRRect(
                               borderRadius: BorderRadius.circular(125),
                               child: Image.network(image)),
-                          title: Text(name),
+                          title: Text(name,style: const TextStyle(color: Colors.white),),
                           subtitle: Text(
                             email,
-                            style: const TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         );
                       }),
                 ),
               ],
             ),
-            const Text('chat'),
+            const Text('Add Events',style: TextStyle(color: Colors.white),),
           ]),
         ),
       ),
@@ -157,3 +150,14 @@ class _MainPageState extends State<MainPage> {
     });
   }
 }
+
+/* asking permission for camera access
+onPressed: () async {
+                    var status = await Permission.photos.request();
+                    if (status.isGranted) {
+                      imagefromgallery();
+                    } else {
+                      openAppSettings();
+                    }
+                  },
+*/
