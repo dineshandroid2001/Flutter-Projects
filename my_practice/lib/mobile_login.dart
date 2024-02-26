@@ -1,10 +1,9 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_practice/main_page.dart';
-import 'package:my_practice/otp.dart';
+//import 'package:my_practice/otp.dart';
 
 class MobileLogin extends StatefulWidget {
   const MobileLogin({super.key});
@@ -16,23 +15,115 @@ class MobileLogin extends StatefulWidget {
 class _MobileLoginState extends State<MobileLogin> {
   final _formKey = GlobalKey<FormState>();
   final mobilenocontrol = TextEditingController();
+  final digit1 = TextEditingController();
+  final digit2 = TextEditingController();
+  final digit3 = TextEditingController();
+  final digit4 = TextEditingController();
   @override
   void initState() {
     super.initState();
     
   }
-  void checking()async {
+  void checking() {
     final isValid = _formKey.currentState?.validate();
     if (isValid!) {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException ex){},
-        codeSent: (String verficationid,int? resendtoken) {
-          Navigator.push(
-          context, MaterialPageRoute(builder: (context) => OtpVerify(verficationid: verficationid,)));
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Enter the OTP'),
+            content: Row(
+              children: [
+                SizedBox(
+                  height: 60,
+                  width: 50,
+                  child: TextFormField(
+                    controller: digit1,
+                    onChanged: (value) {
+                      if (value.length == 1) {
+                        FocusScope.of(context).nextFocus();
+                      }
+                    },
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1),
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  width: 50,
+                  child: TextFormField(
+                    controller: digit2,
+                    onChanged: (value) {
+                      if (value.length == 1) {
+                        FocusScope.of(context).nextFocus();
+                      }
+                    },
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1),
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  width: 50,
+                  child: TextFormField(
+                    controller: digit3,
+                    onChanged: (value) {
+                      if (value.length == 1) {
+                        FocusScope.of(context).nextFocus();
+                      }
+                    },
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1),
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  width: 50,
+                  child: TextFormField(
+                    controller: digit4,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1),
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Re-Genrate OTP'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MainPage()));
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          );
         },
-        codeAutoRetrievalTimeout: (String verficationid){},
-        phoneNumber: mobilenocontrol.text.toString()
       );
     }
     else {
@@ -55,6 +146,7 @@ class _MobileLoginState extends State<MobileLogin> {
       e164Key: '',
       );
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: const Color.fromARGB(0, 255, 59, 59),
         appBar: AppBar(

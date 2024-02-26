@@ -121,6 +121,7 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
             const Text('Add Events',style: TextStyle(color: Colors.white),),
+            const Text('Add Events',style: TextStyle(color: Colors.white),),
           ]),
         ),
       ),

@@ -38,10 +38,9 @@ dependencies:
   http:
   firebase_auth:
   firebase_core:
+  fluttertoast:
   firebase_analytics:
   country_picker:
-  pinput:
-  get:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
