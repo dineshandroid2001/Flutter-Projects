@@ -22,8 +22,8 @@ class _MobileLoginState extends State<MobileLogin> {
   @override
   void initState() {
     super.initState();
-    
   }
+
   void checking() {
     final isValid = _formKey.currentState?.validate();
     if (isValid!) {
@@ -125,8 +125,7 @@ class _MobileLoginState extends State<MobileLogin> {
           );
         },
       );
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -144,14 +143,14 @@ class _MobileLoginState extends State<MobileLogin> {
       displayName: 'India',
       displayNameNoCountryCode: 'IN',
       e164Key: '',
-      );
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(0, 255, 59, 59),
+        backgroundColor: Colors.green,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.brown,
+          backgroundColor: Colors.blue,
           title: const Text(
             'Start Chat',
             style: TextStyle(
@@ -160,90 +159,95 @@ class _MobileLoginState extends State<MobileLogin> {
             ),
           ),
         ),
-        body: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(height: 40),
-                Container(
-                  height: 200,
-                  width: 300,
-                  child: Image.asset(
-                    'image/phone.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: TextFormField(
-                    controller: mobilenocontrol,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                      prefixIcon: Container(
-                        padding: const EdgeInsets.all(8),
-                        child: InkWell(
-                          onTap: () {
-                            showCountryPicker(
-                              countryListTheme: const CountryListThemeData(
-                                bottomSheetHeight: 300,
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.orange,
+                Colors.green,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Center(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: TextFormField(
+                      controller: mobilenocontrol,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.yellow),
+                        ),
+                        prefixIcon: Container(
+                          padding: const EdgeInsets.all(8),
+                          child: InkWell(
+                            onTap: () {
+                              showCountryPicker(
+                                  countryListTheme: const CountryListThemeData(
+                                    bottomSheetHeight: 500,
+                                  ),
+                                  context: context,
+                                  onSelect: (value) {
+                                    setState(() {
+                                      country = value;
+                                    });
+                                  });
+                            },
+                            child: Text(
+                              '${country.flagEmoji} + ${country.phoneCode}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
                               ),
-                              context: context,
-                              onSelect: (value) {
-                                setState(() {
-                                  country = value;
-                                });
-                              });
-                          },
-                          child: Text('${country.flagEmoji} + ${country.phoneCode}',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),),
+                            ),
+                          ),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        hintText: 'Phone Number',
+                      ),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 10) {
+                          return 'Enter a valid Phone Number!,';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 30.0),
+                  Container(
+                    height: 55,
+                    width: MediaQuery.of(context).size.width * .9,
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        checking();
+                      },
+                      child: const Text(
+                        'Generate OTP',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20.0,
                         ),
                       ),
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'Phone Number',
-                    ),
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value!.isEmpty || value.length < 10) {
-                        return 'Enter a valid Phone Number!,';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                const SizedBox(height: 30.0),
-                Container(
-                  height: 55,
-                  width: MediaQuery.of(context).size.width * .9,
-                  decoration: const BoxDecoration(
-                    color: Colors.brown,
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      checking();
-                    },
-                    child: const Text(
-                      'Generate OTP',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
-                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -251,3 +255,15 @@ class _MobileLoginState extends State<MobileLogin> {
     );
   }
 }
+
+/*
+Container(
+                    height: 200,
+                    width: 300,
+                    child: Image.asset(
+                      'image/phone.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+*/

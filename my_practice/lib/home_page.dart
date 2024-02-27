@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.green,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.blue,
         title: const Text(
           'Start Chat',
           style: TextStyle(
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.blue,
+              Colors.orange,
               Colors.green,
             ],
             begin: Alignment.topCenter,
@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                     width: MediaQuery.of(context).size.width * .9,
                     decoration: const BoxDecoration(
                       //borderRadius: BorderRadius.zero,
-                      color: Colors.brown,
+                      color: Colors.blue,
                     ),
                     child: TextButton(
                       onPressed: () {
@@ -221,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                           'Sign Up',
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.brown,
+                            color: Colors.purple,
                           ),
                         ),
                       ),
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                     width: MediaQuery.of(context).size.width * .9,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.zero,
-                      color: Colors.brown,
+                      color: Colors.blue,
                     ),
                     child: TextButton(
                       onPressed: () {
