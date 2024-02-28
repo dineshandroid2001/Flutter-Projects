@@ -156,11 +156,11 @@ class _MainPageState extends State<MainPage> {
                                 child: Image.network(image)),
                             title: Text(
                               name,
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.purple),
                             ),
                             subtitle: Text(
                               email,
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.brown),
                             ),
                           ),
                         );
@@ -179,7 +179,6 @@ class _MainPageState extends State<MainPage> {
                                   builder: (context) => const CreateNote()))
                           .then((value) {
                         if (value) {
-                          //This will be called
                           _refresh();
                         }
                       });
@@ -191,7 +190,6 @@ class _MainPageState extends State<MainPage> {
                     ),
                     )),
                     const SizedBox(height: 8),
-                //Search Field here
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -201,7 +199,6 @@ class _MainPageState extends State<MainPage> {
                   child: TextFormField(
                     controller: keyword,
                     onChanged: (value) {
-                      //When we type something in textfield
                       if (value.isNotEmpty) {
                         setState(() {
                           details = searchNote();
@@ -238,24 +235,20 @@ class _MainPageState extends State<MainPage> {
                               return Card(
                                 elevation: 6,
                                 child: ListTile(
-                                  subtitle: Text(DateFormat("yMd").format(
+                                  subtitle: Text(DateFormat("d/M/y").format(
                                       DateTime.parse(items[index].createdAt))),
                                   title: Text(items[index].eventName),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete),
                                     onPressed: () {
-                                      //We call the delete method in database helper
                                       db
                                           .deleteNote(items[index].eventId!)
                                           .whenComplete(() {
-                                        //After success delete , refresh notes
-                                        //Done, next step is update notes
                                         _refresh();
                                       });
                                     },
                                   ),
                                   onTap: () {
-                                    //When we click on note
                                     setState(() {
                                       name.text = items[index].eventName;
                                       place.text = items[index].eventPlace;
@@ -271,7 +264,6 @@ class _MainPageState extends State<MainPage> {
                                                 children: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      //Now update method
                                                       db
                                                           .updateNote(
                                                               name.text,
@@ -280,7 +272,6 @@ class _MainPageState extends State<MainPage> {
                                                               time.text,
                                                               items[index].eventId)
                                                           .whenComplete(() {
-                                                        //After update, note will refresh
                                                         _refresh();
                                                         Navigator.pop(context);
                                                       });

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_practice/jsonmodel/events.dart';
 import 'package:my_practice/SQflite/sqlite.dart';
-import 'package:path/path.dart';
+
 
 class CreateNote extends StatefulWidget {
   const CreateNote({super.key});
@@ -26,8 +27,9 @@ class _CreateNoteState extends State<CreateNote> {
       lastDate: DateTime(2025),
     ))!;
 
-    if (picked != null && picked != DateTime.now()) {
-      date.text = picked.toString(); // You can format the date as needed
+    if (picked != DateTime.now()) {
+      String formateDate = DateFormat('dd-MM-yyyy').format(picked);
+      date.text = formateDate.toString();
     }
   }
 
@@ -38,7 +40,6 @@ class _CreateNoteState extends State<CreateNote> {
     );
 
     if (selectedTime != null) {
-      // Format the selected time and set it to the controller
       String formattedTime = selectedTime.format(context);
       time.text = formattedTime;
     }
@@ -60,7 +61,6 @@ class _CreateNoteState extends State<CreateNote> {
         backgroundColor: Colors.blue,
       ),
       body: Form(
-          //I forgot to specify key
           key: formKey,
           child: Column(
             children: [
@@ -127,17 +127,16 @@ class _CreateNoteState extends State<CreateNote> {
                     }
                     return null;
                   },
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    prefixIcon: IconButton(
-                        onPressed: () {
-                          selectDate(context);
-                        },
-                        icon: const Icon(Icons.calendar_today)),
-                    enabledBorder: const OutlineInputBorder(
+                  readOnly: true,
+                  onTap: () {
+                    selectDate(context) ;
+                    },
+                  decoration: const InputDecoration(
+                    prefixIcon:Icon(Icons.calendar_today),
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
                     ),
-                    focusedBorder: const OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.yellow),
                     ),
                     fillColor: Colors.white,
@@ -157,11 +156,9 @@ class _CreateNoteState extends State<CreateNote> {
                     }
                     return null;
                   },
-                  //obscureText: false,
                   readOnly: true,
                   onTap: () {
                     pickTime(context).then((_) {
-                      // Handle any additional logic after picking the time
                     });
                   },
                   decoration: const InputDecoration(
